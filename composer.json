@@ -11,6 +11,7 @@
         }
     ],
     "require"   : {
+        "asofter/yii2-imperavi-redactor": "dev-master",
         "bariew/yii2-node-tree" : "1.*"
     },
     "repositories":[
