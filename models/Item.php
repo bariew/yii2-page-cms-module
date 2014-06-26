@@ -3,6 +3,7 @@
 namespace bariew\pageModule\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "page_item".
@@ -22,7 +23,7 @@ use Yii;
  * @property string $page_description
  * @property string $page_keywords
  */
-class Item extends \yii\db\ActiveRecord
+class Item extends ActiveRecord
 {
     public $descendants = array();
     public static $currentPage = false;
@@ -41,7 +42,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'page_item';
+        return '{{page_item}}';
     }
 
     /**

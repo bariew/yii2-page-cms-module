@@ -5,13 +5,13 @@ namespace bariew\pageModule\controllers;
 use Yii;
 use bariew\pageModule\models\Item;
 use bariew\pageModule\models\ItemSearch;
-use app\modules\main\controllers\AdminController;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
  * ItemController implements the CRUD actions for Item model.
  */
-class ItemController extends AdminController
+class ItemController extends Controller
 {
     public $layout = '//menu';
     

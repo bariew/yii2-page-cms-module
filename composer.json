@@ -11,18 +11,9 @@
         }
     ],
     "require"   : {
-        "bariew/yii2-node-tree" : "1.*"
+        "bariew/yii2-node-tree" : "1.*",
+        "asofter/yii2-imperavi-redactor": "dev-master"
     },
-    "repositories":[
-        {
-            "type"  : "git",
-            "url"   : "https://github.com/bariew/yii2-node-tree.git"
-        },
-        {
-            "type"  : "git",
-            "url"   : "https://github.com/bariew/yii2-notice-cms-module.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "bariew\\pageModule\\": ""
