@@ -23,10 +23,10 @@ class ItemController extends Controller
     public function actions() 
     {
         return [
-            'treeMove'      => 'bariew\nodeTree\actions\TreeMoveAction',
-            'treeCreate'    => 'bariew\nodeTree\actions\TreeCreateAction',
-            'treeUpdate'    => 'bariew\nodeTree\actions\TreeUpdateAction',
-            'treeDelete'    => 'bariew\nodeTree\actions\TreeDeleteAction',
+            'tree-move'      => 'bariew\nodeTree\actions\TreeMoveAction',
+            'tree-create'    => 'bariew\nodeTree\actions\TreeCreateAction',
+            'tree-update'    => 'bariew\nodeTree\actions\TreeUpdateAction',
+            'tree-delete'    => 'bariew\nodeTree\actions\TreeDeleteAction',
         ];
     }
     /**
@@ -59,13 +59,14 @@ class ItemController extends Controller
     /**
      * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param $id
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Item;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->move($id, 0)) {
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -112,8 +113,11 @@ class ItemController extends Controller
      * @return Item the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id = null)
     {
+        if ($id === null) {
+            return new Item();
+        }
         if (($model = Item::findOne($id)) !== null) {
             return $model;
         } else {
