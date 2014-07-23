@@ -1,3 +1,6 @@
+<?php
+use \yii\helpers\Url;
+;?>
 <?php echo $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
 <?php echo $form->field($model, 'label')->textInput(['maxlength' => 255]) ?>
@@ -9,10 +12,12 @@
         'model' => $model,
         'attribute' => 'content',
         'options'   => [
-            'minHeight' => 300,
-            'fileUpload' => \Yii::$app->urlManager->createUrl(['/main/admin/fileUpload', 'attr'=>'content']),
-            'imageUpload' => \Yii::$app->urlManager->createUrl(['/main/admin/imageUpload', 'attr'=>'content']),
-            'imageGetJson' => \Yii::$app->urlManager->createUrl(['/main/admin/imageList', 'attr'=>'content']),
+            'minHeight'                => 300,
+            'fileUpload'               => Url::toRoute(['file-upload', 'attr' => 'content']),
+            'imageUpload'              => Url::toRoute(['image-upload', 'attr' => 'content']),
+            'imageGetJson'             => Url::toRoute(['image-list', 'attr' => 'content']),
+            'imageUploadErrorCallback' => new \yii\web\JsExpression('function(json) { alert(json.error); }'),
+            'fileUploadErrorCallback'  => new \yii\web\JsExpression('function(json) { alert(json.error); }'),
          ]
     ]);?>
     <?php if ($model->hasErrors('content')): ?>

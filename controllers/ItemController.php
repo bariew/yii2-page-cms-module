@@ -7,6 +7,7 @@ use bariew\pageModule\models\Item;
 use bariew\pageModule\models\ItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ViewAction;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -14,7 +15,7 @@ use yii\web\NotFoundHttpException;
 class ItemController extends Controller
 {
     public $layout = '//menu';
-    
+
     public function getMenu()
     {
         return Item::findOne(['pid'=>0])->menuWidget();
@@ -22,11 +23,27 @@ class ItemController extends Controller
     
     public function actions() 
     {
+        $path = "/files/".$this->module->id."/".$this->id."/".Yii::$app->user->id;
         return [
             'tree-move'      => 'bariew\nodeTree\actions\TreeMoveAction',
             'tree-create'    => 'bariew\nodeTree\actions\TreeCreateAction',
             'tree-update'    => 'bariew\nodeTree\actions\TreeUpdateAction',
             'tree-delete'    => 'bariew\nodeTree\actions\TreeDeleteAction',
+            'file-upload'    => [
+                'class'         => 'yii\imperavi\actions\FileUpload',
+                'uploadPath'    => Yii::getAlias('@app/web'.$path),
+                'uploadUrl'     => $path
+            ],
+            'image-upload'    => [
+                'class'         => 'yii\imperavi\actions\ImageUpload',
+                'uploadPath'    => Yii::getAlias('@app/web'.$path),
+                'uploadUrl'     => $path
+            ],
+            'image-list'    => [
+                'class'         => 'yii\imperavi\actions\ImageList',
+                'uploadPath'    => Yii::getAlias('@app/web'.$path),
+                'uploadUrl'     => $path
+            ],
         ];
     }
     /**
@@ -64,8 +81,9 @@ class ItemController extends Controller
      */
     public function actionCreate($id)
     {
-        $model = new Item;
-        if ($model->load(Yii::$app->request->post()) && $model->move($id, 0)) {
+        $model = new Item();
+        $model->pid = $id;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -83,7 +101,6 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
