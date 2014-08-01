@@ -11,7 +11,7 @@
         }
     ],
     "require"   : {
-        "bariew/yii2-node-tree" : "1.*",
+        "bariew/yii2-node-tree" : "2.0.*",
         "asofter/yii2-imperavi-redactor": "dev-master"
     },
     "autoload": {
