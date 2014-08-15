@@ -13,12 +13,17 @@ $this->title = Yii::t('app', 'Create {modelClass}', [
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="item-create">
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <?php echo $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+<div class="row">
+    <div class="col-md-3 well">
+        <?= \Yii::$app->controller->menu; ?>
+    </div>
+    <div class="col-md-9">
+        <div class="item-create">
+            <h1><?php echo Html::encode($this->title) ?></h1>
+            <?php echo $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+        </div>
+    </div>
 </div>

@@ -14,8 +14,6 @@ use yii\web\ViewAction;
  */
 class ItemController extends Controller
 {
-    public $layout = '//menu';
-
     public function getMenu()
     {
         return Item::findOne(['pid'=>0])->menuWidget();
