@@ -69,20 +69,20 @@ class Item extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'pid' => Yii::t('app', 'Pid'),
-            'rank' => Yii::t('app', 'Rank'),
-            'title' => Yii::t('app', 'Title'),
-            'brief' => Yii::t('app', 'Brief'),
-            'content' => Yii::t('app', 'Content'),
-            'name' => Yii::t('app', 'Name'),
-            'label' => Yii::t('app', 'Label'),
-            'url' => Yii::t('app', 'Url'),
-            'layout' => Yii::t('app', 'Layout'),
-            'visible' => Yii::t('app', 'Visible'),
-            'page_title' => Yii::t('app', 'Page Title'),
-            'page_description' => Yii::t('app', 'Page Description'),
-            'page_keywords' => Yii::t('app', 'Page Keywords'),
+            'id' => Yii::t('modules/page', 'ID'),
+            'pid' => Yii::t('modules/page', 'Pid'),
+            'rank' => Yii::t('modules/page', 'Rank'),
+            'title' => Yii::t('modules/page', 'Title'),
+            'brief' => Yii::t('modules/page', 'Brief'),
+            'content' => Yii::t('modules/page', 'Content'),
+            'name' => Yii::t('modules/page', 'Name'),
+            'label' => Yii::t('modules/page', 'Label'),
+            'url' => Yii::t('modules/page', 'Url'),
+            'layout' => Yii::t('modules/page', 'Layout'),
+            'visible' => Yii::t('modules/page', 'Visible'),
+            'page_title' => Yii::t('modules/page', 'Page Title'),
+            'page_description' => Yii::t('modules/page', 'Page Description'),
+            'page_keywords' => Yii::t('modules/page', 'Page Keywords'),
         ];
     }
     

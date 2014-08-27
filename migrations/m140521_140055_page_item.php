@@ -1,10 +1,11 @@
 <?php
+use bariew\pageModule\models\Item;
 
 class m140521_140055_page_item extends \yii\db\Migration
 {
     public function safeUp()
     {
-        $this->createTable('{{page_item}}', array(
+        $this->createTable(Item::tableName(), array(
             'id'        => 'pk',
             'pid'       => 'INT(11) DEFAULT 1',
             'rank'      => 'INT(11) DEFAULT 0',
@@ -20,7 +21,7 @@ class m140521_140055_page_item extends \yii\db\Migration
             'page_description'  => 'text',
             'page_keywords'     => 'text'
         ));
-        $this->insert('{{page_item}}', array(
+        $this->insert(Item::tableName(), array(
             'pid'       => 0,
             'title'     => 'Home page',
             'url'       => '/',
@@ -28,10 +29,11 @@ class m140521_140055_page_item extends \yii\db\Migration
             'visible'   => 0
         ));
         \Yii::$app->cache->flush();
+        return true;
     }
 
     public function safeDown()
     {
-        $this->dropTable('{{page_item}}');
+        return $this->dropTable(Item::tableName());
     }
 }

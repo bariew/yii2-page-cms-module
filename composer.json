@@ -2,7 +2,7 @@
     "name": "bariew/yii2-page-cms-module",
     "description": "in development",
     "type": "yii2-extension",
-    "keywords": ["yii2","module","page"],
+    "keywords": ["yii2","module","page", "yii2-null-cms-module"],
     "license": "BSD-3-Clause",
     "authors": [
         {

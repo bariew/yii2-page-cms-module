@@ -7,12 +7,12 @@ use yii\helpers\Html;
  * @var bariew\pageModule\models\Item $model
  */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
+$this->title = Yii::t('modules/page', 'Update {modelClass}: ', [
   'modelClass' => 'Item',
 ]) . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('modules/page', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('modules/page', 'Update');
 ?>
 
 <div class="row">

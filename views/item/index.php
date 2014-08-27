@@ -9,7 +9,7 @@ use yii\grid\GridView;
  * @var bariew\pageModule\models\ItemSearch $searchModel
  */
 
-$this->title = Yii::t('app', 'Items');
+$this->title = Yii::t('modules/page', 'Items');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
