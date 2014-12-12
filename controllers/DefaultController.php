@@ -6,22 +6,14 @@ use yii\web\Controller;
 
 class DefaultController extends Controller
 {
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-    
     public function actionView($url = '/')
     {
-        if (!$model = Item::find()->where(compact('url'))->orderBy('id DESC')->one()) {
+        $model = Item::find()->where([
+            'url' => preg_replace('/[\/]{2,}/', '/', '/' . $url . '/'),
+            'visible' => Item::VISIBLE_YES
+        ])->orderBy('id DESC')->one();
+
+        if (!$model) {
             throw new \yii\web\HttpException(404, "Page not found");
         }
         

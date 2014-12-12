@@ -25,6 +25,10 @@ use yii\db\ActiveRecord;
  */
 class Item extends ActiveRecord
 {
+    const VISIBLE_YES = 1;
+    const VISIBLE_NO = 0;
+
+
     public $descendants = array();
     public static $currentPage = false;
 	
