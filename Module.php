@@ -17,7 +17,9 @@ class Module extends \yii\base\Module
     public function install($moduleName)
     {
         $config = ConfigManager::getData();
-        $config['components']['urlManager']['rules']['<url:\S+>'] = "{$moduleName}/default/view";
+        $config['components']['urlManager']['rules']['/']
+            = $config['components']['urlManager']['rules']['<url:\S+>']
+            = "{$moduleName}/default/view";
         ConfigManager::put($config);
     }
 
@@ -25,6 +27,7 @@ class Module extends \yii\base\Module
     {
         $config = ConfigManager::getData();
         unset($config['components']['urlManager']['rules']['<url:\S+>']);
+        $config['components']['urlManager']['rules']['/'] = 'site/index';
         ConfigManager::put($config);
     }
 }

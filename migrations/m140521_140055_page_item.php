@@ -25,8 +25,8 @@ class m140521_140055_page_item extends \yii\db\Migration
             'pid'       => 0,
             'title'     => 'Home page',
             'url'       => '/',
-            'layout'    => 'index',
-            'visible'   => 0
+            'visible'   => 1,
+            'content'   => '<div class="jumbotron"><p class="lead">Welcome to Page module Home page!</p></div>'
         ));
         \Yii::$app->cache->flush();
         return true;
