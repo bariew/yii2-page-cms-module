@@ -12,6 +12,22 @@ use \yii\helpers\Url;
         'model' => $model,
         'attribute' => 'content',
         'options'   => [
+            'deniedTags' => [],
+            'convertDivs' => false,
+            'paragraphy' => false,
+            'formattingTags' => [],
+            'convertLinks' => false,
+            'cleanup' => false,
+            'removeEmptyTags' => false,
+            'cleanSpaces' => false,
+            'cleanFontTag' => false,
+            'tidyHtml' => false,
+
+            'paragraphize'             => false,
+            'replaceDivs'              => false,
+            'replaceTags'              => false,
+            'replaceStyles'            => false,
+            'removeEmpty'              => false,
             'minHeight'                => 300,
             'fileUpload'               => Url::toRoute(['file-upload', 'attr' => 'content']),
             'imageUpload'              => Url::toRoute(['image-upload', 'attr' => 'content']),
@@ -22,7 +38,7 @@ use \yii\helpers\Url;
     ]);?>
     <?php if ($model->hasErrors('content')): ?>
     <div class="has-error">
-        <?php echo Html::error($model, 'content', $form->field($model, 'content')->errorOptions); ;?>
+        <?php echo \yii\helpers\Html::error($model, 'content', $form->field($model, 'content')->errorOptions); ;?>
     </div>
     <?php endif; ?>
 </div>
