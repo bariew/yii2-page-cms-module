@@ -20,12 +20,6 @@ class ItemSearch extends Item
         ];
     }
 
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
-
     public function search($params)
     {
         $query = Item::find();

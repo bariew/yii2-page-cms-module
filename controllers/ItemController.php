@@ -1,4 +1,9 @@
 <?php
+/**
+ * ItemController class file.
+ * @copyright (c) 2014, Bariew
+ * @license http://www.opensource.org/licenses/bsd-license.php
+ */
 
 namespace bariew\pageModule\controllers;
 
@@ -7,10 +12,10 @@ use bariew\pageModule\models\Item;
 use bariew\pageModule\models\ItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ViewAction;
 
 /**
- * ItemController implements the CRUD actions for Item model.
+ * Manages page models. Also has menu tree.
+ * @author Pavel Bariev <bariew@yandex.ru>
  */
 class ItemController extends Controller
 {
@@ -136,7 +141,7 @@ class ItemController extends Controller
         if (($model = Item::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('modules/page', 'The requested page does not exist.'));
         }
     }
 }
