@@ -2,8 +2,6 @@
 
 namespace bariew\pageModule;
 
-use app\config\ConfigManager;
-
 class Module extends \yii\base\Module
 {
 
@@ -16,18 +14,18 @@ class Module extends \yii\base\Module
 
     public function install($moduleName)
     {
-        $config = ConfigManager::getData();
+        $config = \app\config\ConfigManager::getData();
         $config['components']['urlManager']['rules']['/']
             = $config['components']['urlManager']['rules']['<url:\S+>']
             = "{$moduleName}/default/view";
-        ConfigManager::put($config);
+        \app\config\ConfigManager::put($config);
     }
 
     public function uninstall()
     {
-        $config = ConfigManager::getData();
+        $config = \app\config\ConfigManager::getData();
         unset($config['components']['urlManager']['rules']['<url:\S+>']);
         $config['components']['urlManager']['rules']['/'] = 'site/index';
-        ConfigManager::put($config);
+        \app\config\ConfigManager::put($config);
     }
 }
