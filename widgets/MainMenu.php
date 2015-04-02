@@ -32,14 +32,17 @@ class MainMenu extends \yii\bootstrap\Nav
         if ($cssClass != $this->options['class']) {
             \yii\helpers\Html::removeCssClass($this->options, 'nav');
         }
-        $this->setItems();
+        $this->items = self::generateItems($this->itemOptions);
     }
-    
+
     /**
      * Sets menu items from db page items.
+     * @param $options
+     * @return array
      */
-    private function setItems()
+    public static function generateItems($options)
     {
+        $result = [];
         $models = Item::find()->where(['visible' => true])
             ->orderBy(['rank' => SORT_ASC])
             ->all();
@@ -47,12 +50,13 @@ class MainMenu extends \yii\bootstrap\Nav
          * @var Item $model
          */
         foreach ($models as $model) {
-            $this->items[] = [
+            $result[] = [
                 'label' => $model->label,
                 'url'   => [$model->url],
-                'options' => $this->itemOptions
+                'options' => $options
             ];
         }
+        return $result;
     }
     
     /**
