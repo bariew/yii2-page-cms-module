@@ -1,4 +1,6 @@
 <div class="page-default-index">
-    <h1><?php echo $model->title ?></h1>
+    <?php if($model->title) : ?>
+        <h1><?php echo $model->title ?></h1>
+    <?php endif; ?>
     <?php echo $model->content; ?>
 </div>

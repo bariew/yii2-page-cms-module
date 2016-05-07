@@ -40,7 +40,8 @@ class DefaultController extends Controller
             $this->layout = $model->layout;
         }
         $this->view->title = $model->page_title;
-
+        $this->view->registerMetaTag(['name' => 'description', 'content' => $model->page_description]);
+        $this->view->registerMetaTag(['name' => 'keywords', 'content' => $model->page_keywords]);
         return $this->render('view', compact('model'));
     }
 }

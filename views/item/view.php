@@ -18,7 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col-md-9">
         <div class="item-view">
-            <h1><?php echo Html::encode($this->title) ?></h1>
+            <?php if($model->title) : ?>
+                <h1><?php echo Html::encode($model->title) ?></h1>
+            <?php endif; ?>
             <p>
                 <?php echo Html::a(Yii::t('modules/page', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?php echo Html::a(Yii::t('modules/page', 'Delete'), ['delete', 'id' => $model->id], [

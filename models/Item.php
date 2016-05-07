@@ -2,6 +2,7 @@
 
 namespace bariew\pageModule\models;
 
+use bariew\nodeTree\ARTreeBehavior;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -22,6 +23,8 @@ use yii\db\ActiveRecord;
  * @property string $page_title
  * @property string $page_description
  * @property string $page_keywords
+ *
+ * @mixin ARTreeBehavior
  */
 class Item extends ActiveRecord
 {
@@ -56,7 +59,7 @@ class Item extends ActiveRecord
     {
         return [
             [['pid', 'visible'], 'default', 'value' => 1],
-            [['title', 'label'], 'required', 'except'=>'nodeTree'],
+            [['label'], 'required', 'except'=>'nodeTree'],
             [['name'], 'required', 'except'=>'nodeTree', 
                 'when' => function() { return $this->pid; },
                 'whenClient' => 'function($attribute, $value) { return false; }'
@@ -102,7 +105,7 @@ class Item extends ActiveRecord
     {
         return [
             'nodeTree' => [
-                'class'         => 'bariew\nodeTree\ARTreeBehavior',
+                'class'         => ARTreeBehavior::className(),
                 'actionPath'    => '/page/item/update'
             ]
         ];
