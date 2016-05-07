@@ -7,9 +7,7 @@ use yii\helpers\Html;
  * @var bariew\pageModule\models\Item $model
  */
 
-$this->title = Yii::t('modules/page', 'Create {modelClass}', [
-  'modelClass' => 'Item',
-]);
+$this->title = Yii::t('modules/page', 'Create Page');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('modules/page', 'Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

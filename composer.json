@@ -12,7 +12,8 @@
     ],
     "require"   : {
         "bariew/yii2-node-tree" : "2.0.*",
-        "bariew/yii2-imperavi-redactor": "dev-master"
+        "bariew/yii2-imperavi-redactor": "dev-master",
+        "bariew/yii2-dropdown-x": ">=1.0.4"
     },
     "autoload": {
         "psr-4": {

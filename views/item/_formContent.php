@@ -3,8 +3,6 @@ use \yii\helpers\Url;
 ;?>
 <?php echo $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
-<?php echo $form->field($model, 'label')->textInput(['maxlength' => 255]) ?>
-
 <?php echo $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
 <div class="form-group required">

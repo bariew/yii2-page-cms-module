@@ -22,26 +22,19 @@ class DefaultController extends Controller
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionView($url = '/')
+    public function actionView($url)
     {
         /**
          * @var Item $model
          */
-        $model = Item::find()->where([
-            'url' => preg_replace('/[\/]{2,}/', '/', '/' . $url . '/'),
-            'visible' => Item::VISIBLE_YES
-        ])->orderBy('id DESC')->one();
-
-        if (!$model) {
+        if (!$model = Item::getCurrentPage($url)) {
             throw new \yii\web\HttpException(404, \Yii::t('modules/page', "Page not found"));
         }
-        
+
         if ($model->layout) {
             $this->layout = $model->layout;
         }
-        $this->view->title = $model->page_title;
-        $this->view->registerMetaTag(['name' => 'description', 'content' => $model->page_description]);
-        $this->view->registerMetaTag(['name' => 'keywords', 'content' => $model->page_keywords]);
+
         return $this->render('view', compact('model'));
     }
 }

@@ -9,7 +9,6 @@ namespace bariew\pageModule\controllers;
 
 use Yii;
 use bariew\pageModule\models\Item;
-use bariew\pageModule\models\ItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -19,11 +18,18 @@ use yii\web\NotFoundHttpException;
  */
 class ItemController extends Controller
 {
+    /**
+     * Renders JSTree menu
+     * @return string|void
+     */
     public function getMenu()
     {
         return Item::findOne(['pid'=>0])->menuWidget();
     }
-    
+
+    /**
+     * @inheritdoc
+     */
     public function actions() 
     {
         $path = "/files/".$this->module->id."/".$this->id."/".Yii::$app->user->id;
@@ -55,25 +61,7 @@ class ItemController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ItemSearch;
-        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel,
-        ]);
-    }
-
-    /**
-     * Displays a single Item model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -105,7 +93,7 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

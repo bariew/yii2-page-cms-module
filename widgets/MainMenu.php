@@ -6,15 +6,16 @@
  */
 
 namespace bariew\pageModule\widgets;
+use bariew\dropdown\Nav;
 use \bariew\pageModule\models\Item;
 use yii\helpers\Url;
 
 /**
- * Widget for site main menu.
+ * Widget for the site main menu.
  *
  * @author Pavel Bariev <bariew@yandex.ru>
  */
-class MainMenu extends \yii\bootstrap\Nav
+class MainMenu extends Nav
 {
     /**
      * Each li item options.
@@ -27,38 +28,21 @@ class MainMenu extends \yii\bootstrap\Nav
      */
     public function init() 
     {
-        $cssClass = @$this->options['class'];
         parent::init();
+        $cssClass = @$this->options['class'];
         if ($cssClass != $this->options['class']) {
             \yii\helpers\Html::removeCssClass($this->options, 'nav');
         }
-        $this->items = self::generateItems($this->itemOptions);
+        $this->items = Item::find()
+            ->select(['*', 'parent_id' => '(IF(pid=1,"",pid))', 'name' => 'title'])
+            ->where(['visible' => true])
+            ->andWhere(['<>', 'pid', ''])
+            ->indexBy('id')
+            ->orderBy(['rank' => SORT_ASC])
+            ->asArray()
+            ->all();
     }
 
-    /**
-     * Sets menu items from db page items.
-     * @param $options
-     * @return array
-     */
-    public static function generateItems($options)
-    {
-        $result = [];
-        $models = Item::find()->where(['visible' => true])
-            ->orderBy(['rank' => SORT_ASC])
-            ->all();
-        /**
-         * @var Item $model
-         */
-        foreach ($models as $model) {
-            $result[] = [
-                'label' => $model->label,
-                'url'   => [$model->url],
-                'options' => $options
-            ];
-        }
-        return $result;
-    }
-    
     /**
      * @inheritdoc
      */

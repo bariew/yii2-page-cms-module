@@ -3,7 +3,7 @@ use bariew\pageModule\models\Item;
 
 class m140521_140055_page_item extends \yii\db\Migration
 {
-    public function safeUp()
+    public function up()
     {
         $this->createTable(Item::tableName(), array(
             'id'        => 'pk',
@@ -13,7 +13,6 @@ class m140521_140055_page_item extends \yii\db\Migration
             'brief'     => 'text',
             'content'   => 'text',
             'name'      => 'string',
-            'label'     => 'string',
             'url'       => 'string',
             'layout'    => 'string',
             'visible'   => 'TINYINT(1) DEFAULT 1',
@@ -23,18 +22,16 @@ class m140521_140055_page_item extends \yii\db\Migration
         ));
         $this->insert(Item::tableName(), array(
             'pid'       => 0,
-            'title'     => 'Home page',
+            'title'     => Yii::$app->name,
             'url'       => '/',
             'visible'   => 1,
             'page_title'=> 'Home page',
-            'label'     => Yii::$app->name,
             'content'   => '<div class="jumbotron"><p class="lead">Welcome to Page module Home page!</p></div>'
         ));
-        return true;
     }
 
-    public function safeDown()
+    public function down()
     {
-        return $this->dropTable(Item::tableName());
+        $this->dropTable(Item::tableName());
     }
 }
