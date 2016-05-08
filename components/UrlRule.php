@@ -18,14 +18,31 @@ use bariew\pageModule\models\Item;
  */
 class UrlRule extends \yii\web\UrlRule
 {
+    public $enforceSeo = false;
     /**
      * @inheritdoc
      */
     public function parseRequest($manager, $request)
     {
         if (!$result = parent::parseRequest($manager, $request)) {
-            return $result;
+            return false;
         }
-        return Item::getCurrentPage($request->pathInfo) ? $result : false;
+        if (!Item::getCurrentPage($request->pathInfo)) {
+            return false;
+        }
+        // this will return real module/controller/action instead of existing page but with seo metatags
+        if ($this->enforceSeo) {
+            $manager->rules = array_filter($manager->rules, function($rule) {
+                return !$rule instanceof $this;
+            });
+            if (!$result2 = $manager->parseRequest($request)) {
+                return $result;
+            }
+            if (\Yii::$app->createController($result2[0])) {
+                return $result2;
+            }
+        }
+
+        return $result;
     }
 }

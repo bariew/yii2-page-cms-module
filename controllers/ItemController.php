@@ -75,7 +75,8 @@ class ItemController extends Controller
         $model = new Item();
         $model->pid = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -93,7 +94,8 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -109,8 +111,8 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
+        Yii::$app->session->setFlash('success', Yii::t('modules/page', 'Success'));
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

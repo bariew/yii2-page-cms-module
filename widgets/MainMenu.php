@@ -22,6 +22,8 @@ class MainMenu extends Nav
      * @var array html options.
      */
     public $itemOptions = [];
+
+    public $activateParents = true;
     
     /**
      * @inheritdoc
@@ -48,6 +50,6 @@ class MainMenu extends Nav
      */
     protected function isItemActive($item)
     {
-        return Url::to($item['url']) == Url::to(['/' . \Yii::$app->request->pathInfo]);
+        return is_numeric(strpos('/'.\Yii::$app->request->pathInfo .'/', $item['url'][0]));
     }
 }
