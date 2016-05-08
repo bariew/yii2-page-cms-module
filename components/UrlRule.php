@@ -18,7 +18,11 @@ use bariew\pageModule\models\Item;
  */
 class UrlRule extends \yii\web\UrlRule
 {
+    /**
+     * @var bool whether to use matching page seo tags on other modules pages
+     */
     public $enforceSeo = false;
+
     /**
      * @inheritdoc
      */
@@ -27,22 +31,16 @@ class UrlRule extends \yii\web\UrlRule
         if (!$result = parent::parseRequest($manager, $request)) {
             return false;
         }
-        if (!Item::getCurrentPage($request->pathInfo)) {
-            return false;
-        }
-        // this will return real module/controller/action instead of existing page but with seo metatags
         if ($this->enforceSeo) {
-            $manager->rules = array_filter($manager->rules, function($rule) {
-                return !$rule instanceof $this;
-            });
-            if (!$result2 = $manager->parseRequest($request)) {
-                return $result;
-            }
-            if (\Yii::$app->createController($result2[0])) {
-                return $result2;
-            }
+            Item::getCurrentPage($request->pathInfo); // sets seo meta tags
+        }
+        $manager->rules = array_filter($manager->rules, function($rule) {
+            return !$rule instanceof $this;
+        });
+        if (!$result2 = $manager->parseRequest($request)) {
+            return $result;
         }
 
-        return $result;
+        return \Yii::$app->createController($result2[0]) ? $result2 : $result;
     }
 }
