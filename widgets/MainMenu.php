@@ -18,11 +18,8 @@ use yii\helpers\Url;
 class MainMenu extends Nav
 {
     /**
-     * Each li item options.
-     * @var array html options.
+     * @inheritdoc
      */
-    public $itemOptions = [];
-
     public $activateParents = true;
     
     /**
@@ -30,8 +27,8 @@ class MainMenu extends Nav
      */
     public function init() 
     {
-        parent::init();
         $cssClass = @$this->options['class'];
+        parent::init();// significant order
         if ($cssClass != $this->options['class']) {
             \yii\helpers\Html::removeCssClass($this->options, 'nav');
         }
