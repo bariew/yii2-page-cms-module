@@ -22,7 +22,7 @@ class DefaultController extends Controller
      * @return string
      * @throws \yii\web\HttpException
      */
-    public function actionView($url)
+    public function actionView($url = '/')
     {
         /**
          * @var Item $model
